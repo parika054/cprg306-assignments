@@ -3,7 +3,7 @@ import React from 'react';
 import Item from './item';
 
 const ItemList = () => {
-    // Define the item objects
+ // Define the item objects
     const item1 = {
         name: "milk, 4 L ??",
         quantity: 1,
@@ -81,7 +81,7 @@ const ItemList = () => {
    
 
     return (
-        <ul>
+        <ul className="max-w-md mx-auto mt-8 grid gap-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4">
             
             {items.map((item, index) => (
                 <Item key={index} {...item} />
