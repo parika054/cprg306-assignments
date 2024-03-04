@@ -10,6 +10,7 @@ export default function NewItem() {
   const item = ( name, quantity, category ) => {
     return name+" , Quantity"+quantity+", Category "+category;
   };
+  //here, e represents the event
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("Item added: " + item(name, quantity, category));
@@ -20,7 +21,7 @@ export default function NewItem() {
   return (
     <form onSubmit={handleSubmit} className="p-2 m-4 bg-green-100 text-black max-w-sm w-full min-h-fit">
      <div className="mb-3">
-        <input type="text" placeholder="Item Name" value={name} onChange={(event) => setName(e.target.value)} className="w-full mt-2 border-3 border-green-100 p-2 rounded-lg font-sans" required/>
+        <input type="text" placeholder="Item Name" value={name} onChange={(e) => setName(e.target.value)} className="w-full mt-2 border-3 border-green-100 p-2 rounded-lg font-sans" required/>
       </div>
         <div className="flex justify-between">
             <input type="number" placeholder="Quantity" className="w-20 ml-2 border-3 border-green-100 p-2 rounded-lg font-sans" value={quantity} onChange={(e) => setQuantity(e.target.value)} />
@@ -31,7 +32,7 @@ export default function NewItem() {
                 <option value="dairy">Dairy</option>
                 <option value="bakery">Bakery</option>
                 <option value="meat">Meat</option>
-                <option value="forzen foods">Frozen Foods</option>
+                <option value="frozen foods">Frozen Foods</option>
                 <option value="canned goods">Canned Goods</option>
                 <option value="dry goods">Dry Goods</option>
                 <option value="beverages">Beverages</option>

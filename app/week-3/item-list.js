@@ -1,92 +1,61 @@
-// /app/week-3/item-list.js
-import React from 'react';
+// /app/week-5/item-list.js
+import React, { useState } from 'react';
 import Item from './item';
+import itemsData from './items.json'; // make sure the path is correct
 
 const ItemList = () => {
- // Define the item objects
-    const item1 = {
-        name: "milk, 4 L ??",
-        quantity: 1,
-        category: "dairy",
+    // State to manage the sorting criteria
+    const [sortBy, setSortBy] = useState('name');
+
+    // Function to sort items based on the current sortBy state
+    const sortItems = (items, criteria) => {
+        return items.sort((a, b) => {
+            if (criteria === 'name') {
+                return a.name.localeCompare(b.name);
+            }
+            return a.category.localeCompare(b.category);
+        });
     };
 
-    const item2 = {
-        name: "bread ??",
-        quantity: 2,
-        category: "bakery",
-    };
+    // Inline styles for active and inactive buttons
+    const buttonStyle = (isActive) => ({
+        cursor: 'pointer',
+        padding: '10px 20px',
+        margin: '0 5px',
+        backgroundColor: isActive ? '#FFA500' : 'transparent', // Active buttons have an orange background
+        color: isActive ? 'white' : 'black', // Active buttons have white text
+        border: `1px solid ${isActive ? '#FFA500' : 'grey'}`,
+        borderRadius: '5px',
+        outline: 'none',
+    });
 
-    const item3 = {
-        name: "eggs, dozen ??",
-        quantity: 2,
-        category: "dairy",
-    };
-
-    const item4 = {
-        name: "bananas ??",
-        quantity: 6,
-        category: "produce",
-    };
-
-    const item5 = {
-        name: "broccoli ??",
-        quantity: 3,
-        category: "produce",
-    };
-
-    const item6 = {
-        name: "chicken breasts, 1 kg ??",
-        quantity: 1,
-        category: "meat",
-    };
-
-    const item7 = {
-        name: "pasta sauce ??",
-        quantity: 3,
-        category: "canned goods",
-    };
-
-    const item8 = {
-        name: "spaghetti, 454 g ??",
-        quantity: 2,
-        category: "dry goods",
-    };
-
-    const item9 = {
-        name: "toilet paper, 12 pack ??",
-        quantity: 1,
-        category: "household",
-    };
-
-    const item10 = {
-        name: "paper towels, 6 pack",
-        quantity: 1,
-        category: "household",
-    };
-
-    const item11 = {
-        name: "dish soap ???",
-        quantity: 1,
-        category: "household",
-    };
-
-    const item12 = {
-        name: "hand soap ??",
-        quantity: 4,
-        category: "household",
-    };
-
-    const items = [item1,item2,item3,item4,item5,item6,item7,item8,item9,item10,item11,item12];
-   
-   
+    // Sorted items based on the sortBy state
+    const sortedItems = sortItems([...itemsData], sortBy);
 
     return (
-        <ul className="max-w-md mx-auto mt-8 grid gap-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4">
-            
-            {items.map((item, index) => (
-                <Item key={index} {...item} />
-            ))}
-        </ul>
+        <div>
+            {/* Sort buttons with conditional styling */}
+            <div className="flex justify-center gap-2 mb-4">
+                <button
+                    className={`btn ${sortBy === 'name' ? 'active' : ''}`}
+                    onClick={() => setSortBy('name')}
+                >
+                    Name
+                </button>
+                <button
+                    className={`btn ${sortBy === 'category' ? 'active' : ''}`}
+                    onClick={() => setSortBy('category')}
+                >
+                    Category
+                </button>
+            </div>
+            {/* Item list */}
+            <ul className="max-w-md mx-auto mt-8 grid gap-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4">
+                {sortedItems.map((item) => (
+                    <Item key={item.id} {...item} />
+                ))}
+            </ul>
+        </div>
     );
 };
 

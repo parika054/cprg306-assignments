@@ -19,17 +19,26 @@ const ItemList = () => {
     // Return the list of sorted items
     return (
         <div>
-        <div className="flex justify-center space-x-2 my-4">
-            <button onClick={() => setSortBy('name')} className="px-4 py-2 bg-orange-500 text-white rounded hover:bg-orange-600 focus:outline-none">Sort by Name</button>
-            <button onClick={() => setSortBy('category')} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none">Sort by Category</button>
-            {/* Add your logic for Grouped Category button if needed */}
+        <div className="px-2">
+          <label htmlFor="sort">Sort by:</label>
+          <button className={` p-1 m-2 w-28 hover:scale-110 duration-300 ease-out ${sortBy == "name" ? "bg-orange-500" : "bg-orange-700"}`} value="name" onClick={(value1) => { setSortBy(value1.target.value); }}>Name</button>
+          <button className={` p-1 m-2 w-28 hover:scale-110 duration-300 ease-out ${sortBy == "category" ? "bg-orange-500" : "bg-orange-700"}`} onClick={(value2) => { setSortBy(value2.target.value); }} value="category">Category</button>
+          <button className={` p-1 m-2 w-28 hover:scale-110 duration-300 ease-out ${sortBy == "group_list" ? "bg-orange-500" : "bg-orange-700"}`} onClick={(value3) => { setSortBy(value3.target.value); }} value="group_list">Grouped Category</button>
         </div>
-        <ul className="max-w-md mx-auto mt-8 grid gap-4 grid-cols-1 sm:grid-cols-3 lg:grid-cols-4">
-            {sortedItems.map((item) => (
-                <Item key={item.id} {...item} />
-            ))}
+        <ul>
+          <>
+        
+          {sortBy != "group_list" ? items.map((item, index) => (
+            <Item key={index} name={item.name} quantity={item.quantity} category={item.category} />
+          )) : items.map((item, index) => (
+            <>
+            {item.category == items[wow].category ? "" : <h2 className="text-xl">{item.category.charAt(0).toUpperCase() + item.category.slice(1)}</h2>}
+            <span className="hidden">{wow = index}</span>
+            <Item key={index-1} name={item.name} quantity={item.quantity} category={item.category} /></>
+          ))}
+          </>
         </ul>
-    </div>
+      </div>
     );
 };
 
