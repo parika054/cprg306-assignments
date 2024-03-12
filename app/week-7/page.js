@@ -17,8 +17,8 @@ const Page = () => {
 
     // Event handler for when an item is clicked
     const handleItemSelect = (itemName) => {
-        const cleanedName = cleanItemName(itemName); // Clean up the item name to use with the API
-        setSelectedItemName(cleanedName); // Update the state with the cleaned item name
+        const cleanedName = cleanItemName(itemName); 
+        setSelectedItemName(cleanedName); 
     };
 
     // Function to clean up item names, removing quantity and emoji
@@ -31,10 +31,10 @@ const Page = () => {
             <div className="w-1/2">
                 <h1 className="text-4xl font-bold text-center text-blue-900">Shopping List</h1>
                 <NewItem onAddItem={handleAddItem} />
-                <ItemList items={items} onItemSelect={handleItemSelect} /> {/* Pass handleItemSelect to ItemList */}
+                <ItemList items={items} onItemSelect={handleItemSelect} /> 
             </div>
             <div className="w-1/2">
-                <MealIdeas ingredient={selectedItemName} /> {/* Pass the selected item name to MealIdeas */}
+                <MealIdeas ingredient={selectedItemName} /> 
             </div>
         </main>
     );
