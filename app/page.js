@@ -28,6 +28,9 @@ export default function HomePage() {
               <Link href="/week-8" className="bg-orange-300 text-black font-bold py-3 px-6 rounded hover: text-orange-900 transition duration-200">
                         Click here to see my Project part 8!
               </Link>
+              <Link href="/week-10" className="bg-orange-300 text-black font-bold py-3 px-6 rounded hover: text-orange-900 transition duration-200">
+                        Click here to see my Project part 10!
+              </Link>
           
       </main>
   );
