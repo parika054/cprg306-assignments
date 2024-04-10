@@ -1,32 +1,43 @@
 "use client";
-import { useUserAuth } from "./_utils/auth-context";
+import React from 'react';
+import { useUserAuth } from './_utils/auth-context';
 
-const LandingPage = () => {
-  const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
+function LandingPage() {
+    const { user, gitHubSignIn, firebaseSignOut } = useUserAuth();
 
-  const handleGitHubSignIn = async () => {
-    await gitHubSignIn();
-  };
+    const handleLogin = async () => {
+        await gitHubSignIn();
+    };
 
-  const handleSignOut = async () => {
-    await firebaseSignOut();
-  };
+    const handleLogout = async () => {
+        await firebaseSignOut();
+    };
 
-  return (
-    <div className=" bg-slate-950 text-white h-screen flex content-center m-auto justify-around  flex-row align-middle w-full text-center">
-      {user ? (
-        <div className="m-4">
-          <p className="text-xl font-bold">Welcome, {user.displayName} ({user.email})</p>
-          <div className="flex gap-4 text-center align-middle content-center justify-around">
-          <button onClick={handleSignOut} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Logout</button>
-          <a href="./week-10/shopping-list" className="text-blue-500 hover:underline mt-4">Go to Shopping List</a>
-          </div>
-        </div>
-      ) : (
-        <button onClick={handleGitHubSignIn} className="bg-gray-500 hover:bg-gray-700 text-white font-bold p-4 rounded m-4 h-20 w-fit">Login with GitHub</button>
-      )}
-    </div>
-  );
-};
+    if (user) {
+        return (
+            <div className="flex justify-center items-center h-screen bg-blue-200">
+                <div className="text-center">
+                    <p className="mb-4 text-black text-lg">Authorization went Successful !!! <span className="font-semibold">{user.displayName}</span> ({user.email})</p>
+                    <button onClick={handleLogout} className="bg-blue-400 hover:bg-purple-500 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Logout
+                    </button>
+                    <div className="mt-4">
+                        <a href="/week-10/shopping-list" className="text-black hover:text-purple-500">Click here to Go to Shopping List </a>
+                    </div>
+                </div>
+            </div>
+        );
+    } else {
+        return (
+            <div className="flex justify-center items-center h-screen bg-blue-100">
+                <div className="text-center p-8 ">
+                    <button onClick={handleLogin} className="bg-blue-400 hover:bg-purple-500 text-white font-bold py-2 px-4 ">
+                        Login
+                    </button>
+                </div>
+            </div>
+        );
+    }
+}
 
 export default LandingPage;
