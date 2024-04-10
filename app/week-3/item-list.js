@@ -1,8 +1,7 @@
 // /app/week-5/item-list.js
 import React, { useState } from 'react';
 import Item from './item';
-import itemsData from './items.json'; // make sure the path is correct
-
+import itemsData from './items.json'; // Importing the items data
 const ItemList = () => {
     // State to manage the sorting criteria
     const [sortBy, setSortBy] = useState('name');

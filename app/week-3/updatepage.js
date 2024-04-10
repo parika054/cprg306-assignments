@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
         <>
             <Helmet>
                 <meta charSet="utf-8" />
-                <title>Shopping List</title> {/* Update the title here */}
+                <title>Shopping List</title> 
                 {/* ... other meta tags, styles, etc. */}
             </Helmet>
             {children}
